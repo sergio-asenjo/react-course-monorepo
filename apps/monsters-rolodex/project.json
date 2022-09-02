@@ -1,0 +1,83 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/monsters-rolodex/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/monsters-rolodex",
+        "index": "apps/monsters-rolodex/src/index.html",
+        "baseHref": "/",
+        "main": "apps/monsters-rolodex/src/main.tsx",
+        "polyfills": "apps/monsters-rolodex/src/polyfills.ts",
+        "tsConfig": "apps/monsters-rolodex/tsconfig.app.json",
+        "assets": [
+          "apps/monsters-rolodex/src/favicon.ico",
+          "apps/monsters-rolodex/src/assets"
+        ],
+        "styles": ["apps/monsters-rolodex/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/monsters-rolodex/src/environments/environment.ts",
+              "with": "apps/monsters-rolodex/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "monsters-rolodex:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "monsters-rolodex:build:development"
+        },
+        "production": {
+          "buildTarget": "monsters-rolodex:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/monsters-rolodex/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/monsters-rolodex"],
+      "options": {
+        "jestConfig": "apps/monsters-rolodex/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

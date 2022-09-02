@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "monsters-rolodex": "apps/monsters-rolodex",
+    "monsters-rolodex-e2e": "apps/monsters-rolodex-e2e"
+  }
+}
