@@ -10,7 +10,11 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@components/*": ["apps/monsters-rolodex/src/app/components/*"],
+      "@interfaces/*": ["apps/monsters-rolodex/src/app/interfaces/*"],
+    }
   },
   "files": [],
   "include": [],

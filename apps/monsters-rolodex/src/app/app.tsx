@@ -1,38 +1,11 @@
+import Card from '@components/card/card.component';
+import SearchBox from '@components/search-box/search-box.component';
+import { IMonster } from '@interfaces/IMonster';
 import React from 'react';
 import './app.scss';
 
 interface IState {
   monsters: IMonster[];
-}
-
-interface IMonster {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  address: Address;
-  phone: string;
-  website: string;
-  company: Company;
-}
-
-interface Address {
-  street: string;
-  suite: string;
-  city: string;
-  zipcode: string;
-  geo: Geo;
-}
-
-interface Geo {
-  lat: string;
-  lng: string;
-}
-
-interface Company {
-  name: string;
-  catchPhrase: string;
-  bs: string;
 }
 
 export class App extends React.Component<{}, IState> {
@@ -47,17 +20,18 @@ export class App extends React.Component<{}, IState> {
   }
 
   override render() {
+    const { monsters } = this.state;
+    const { handleChange } = this;
+
     return (
       <div className="app">
-        <input
-          className="search-input"
-          type="search"
-          placeholder="Search monsters"
-          onChange={this.handleChange}
-        />
-        {this.state.monsters.map((monster) => {
-          return <h1 key={monster.id}>{monster.name}</h1>;
-        })}
+        <h1 className="title">Monsters Rolodex</h1>
+        <SearchBox placeholder="Search monsters" onChangeHandler={handleChange} />
+        <div className="monsters__container">
+          {monsters.map((monster) => {
+            return <Card monster={monster} key={monster.id}/>;
+          })}
+        </div>
       </div>
     );
   }
