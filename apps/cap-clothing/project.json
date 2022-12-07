@@ -1,0 +1,84 @@
+{
+  "name": "cap-clothing",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cap-clothing/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/cap-clothing",
+        "index": "apps/cap-clothing/src/index.html",
+        "baseHref": "/",
+        "main": "apps/cap-clothing/src/main.tsx",
+        "polyfills": "apps/cap-clothing/src/polyfills.ts",
+        "tsConfig": "apps/cap-clothing/tsconfig.app.json",
+        "assets": [
+          "apps/cap-clothing/src/favicon.ico",
+          "apps/cap-clothing/src/assets"
+        ],
+        "styles": ["apps/cap-clothing/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/cap-clothing/src/environments/environment.ts",
+              "with": "apps/cap-clothing/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "cap-clothing:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "cap-clothing:build:development"
+        },
+        "production": {
+          "buildTarget": "cap-clothing:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/cap-clothing/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/cap-clothing"],
+      "options": {
+        "jestConfig": "apps/cap-clothing/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
