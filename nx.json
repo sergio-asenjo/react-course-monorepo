@@ -33,6 +33,7 @@
       "application": {
         "style": "scss",
         "linter": "eslint",
+        "bundler": "vite",
         "babel": true
       },
       "component": {
@@ -40,7 +41,8 @@
       },
       "library": {
         "style": "scss",
-        "linter": "eslint"
+        "linter": "eslint",
+        "unitTestRunner": "vitest"
       }
     }
   },
