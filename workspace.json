@@ -2,7 +2,8 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "monsters-rolodex": "apps/monsters-rolodex",
-    "monsters-rolodex-e2e": "apps/monsters-rolodex-e2e"
+    "cap-clothing": "apps/cap-clothing",
+    "cap-clothing-e2e": "apps/cap-clothing-e2e",
+    "monsters-rolodex": "apps/monsters-rolodex"
   }
 }

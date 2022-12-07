@@ -1,4 +1,5 @@
 {
+  "name": "monsters-rolodex",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/monsters-rolodex/src",
   "projectType": "application",
@@ -72,7 +73,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/monsters-rolodex"],
+      "outputs": ["{workspaceRoot}/coverage/apps/monsters-rolodex"],
       "options": {
         "jestConfig": "apps/monsters-rolodex/jest.config.ts",
         "passWithNoTests": true
