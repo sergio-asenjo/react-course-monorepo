@@ -6,7 +6,6 @@ interface CategoryBoxProps {
 }
 
 const CategoryBox = ({ title, imageUrl }: CategoryBoxProps) => {
-  console.debug('CategoryBox', { title, imageUrl })
   return (
     <div className="category flex-col">
       <div

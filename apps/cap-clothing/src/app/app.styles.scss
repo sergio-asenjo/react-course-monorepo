@@ -30,13 +30,3 @@ h2 {
 .container > *:nth-child(n+4):nth-child(-n+5) {
   grid-column: span 3;
 }
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
