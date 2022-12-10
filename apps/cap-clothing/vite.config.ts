@@ -8,6 +8,12 @@ export default defineConfig({
     port: 4200,
     host: 'localhost',
   },
+  css: {
+    devSourcemap: true,
+  },
+  build: {
+    sourcemap: true,
+  },
   plugins: [
     react(),
     tsconfigPaths({
