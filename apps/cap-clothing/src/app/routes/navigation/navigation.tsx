@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import Crown from '../../../assets/crown.svg';
 import NavLink from '../../components/nav-link/nav-link.component';
@@ -10,10 +10,17 @@ export interface NavigationProps {}
 
 const Navigation = (props: NavigationProps) => {
   const [active, setActive] = useState('/');
+  const location = useLocation();
+
+  useEffect(() => {
+    setActive(location.pathname);
+  },)
+  
 
   const links = [
     { id: 1, to: '/', description: 'Home' },
     { id: 2, to: '/shop', description: 'Shop' },
+    { id: 3, to: '/sign-in', description: 'Sign In' },
   ];
 
   return (

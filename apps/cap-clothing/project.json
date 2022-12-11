@@ -29,7 +29,13 @@
         },
         "production": {
           "buildTarget": "cap-clothing:build:production",
-          "hmr": false
+          "hmr": false,
+          "fileReplacement": [
+            {
+              "replace": "apps/cap-clothing/src/environments/environment.ts",
+              "with": "apps/cap-clothing/src/environments/environment.prod.ts"
+            }
+          ]
         }
       }
     },
