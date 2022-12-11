@@ -4,14 +4,11 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
   User,
+  UserCredential,
 } from 'firebase/auth';
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc,
-} from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: 'AIzaSyD1wmDRmREONG-n_0zZcFK7jMYcQHF0Mz0',
@@ -29,23 +26,27 @@ provider.setCustomParameters({ prompt: 'select_account' });
 
 export const auth = getAuth(app);
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, provider);
 
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth: User) => {
+export const createUserDocumentFromAuth = async (
+  userAuth: User,
+  userName?: string
+) => {
   const userRef = doc(db, 'users', userAuth.uid);
   const userSnapshot = await getDoc(userRef);
 
   if (!userSnapshot.exists()) {
     const { displayName, email, photoURL } = userAuth;
-    console.debug(photoURL);
     const createdAt = new Date();
 
     try {
       await setDoc(userRef, {
-        displayName,
+        displayName: displayName ?? userName,
         email,
-        photoURL,
+        photoURL: photoURL ?? `https://avatars.dicebear.com/api/initials/${userName}.svg`,
         createdAt,
       });
     } catch (error) {
@@ -54,4 +55,12 @@ export const createUserDocumentFromAuth = async (userAuth: User) => {
   }
 
   return userRef;
+};
+
+export async function createNewUserWithEmailAndPassword(
+  email: string,
+  password: string
+): Promise<UserCredential | null> {
+  if (!email || !password) return null;
+  return await createUserWithEmailAndPassword(auth, email, password);
 }

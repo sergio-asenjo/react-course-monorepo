@@ -1,0 +1,22 @@
+.input-label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 0.5rem;
+  margin: 0;
+}
+
+.input {
+  height: 3rem;
+  width: 100%;
+  padding: 0.3rem 1rem;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  outline: none;
+}
+
+.input:focus {
+  border: 1px solid hsl(0, 0%, 20%);
+}
