@@ -1,16 +1,20 @@
-import { Route, Routes, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
-import CategoryMenu from './components/category-menu/category-menu.component';
+import Navigation from './routes/navigation/navigation';
+import Home from './routes/home/home.component';
+import Shop from './routes/shop/shop.component';
 
 import './app.styles.scss';
 
 export function App() {
-
   return (
-    <>
-      <CategoryMenu />
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<Navigation />}>
+        <Route index element={<Home />} />
+        <Route path="/shop" element={<Shop/>} />
+      </Route>
+    </Routes>
+  );
 }
 
 export default App;

@@ -1,0 +1,10 @@
+.nav-container {
+  align-items: center;
+  width: 100%;
+  padding: 10px 0 20px 0;
+  justify-content: space-between;
+
+  .nav-items {
+    gap: 20px;
+  }
+}

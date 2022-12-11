@@ -46,7 +46,7 @@
       }
     }
   },
-  "defaultProject": "monsters-rolodex",
+  "defaultProject": "cap-clothing",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": [],
