@@ -20,7 +20,7 @@ const Navigation = (props: NavigationProps) => {
   const links = [
     { id: 1, to: '/', description: 'Home' },
     { id: 2, to: '/shop', description: 'Shop' },
-    { id: 3, to: '/sign-in', description: 'Sign In' },
+    { id: 3, to: '/authentication', description: 'Sign In' },
   ];
 
   return (
