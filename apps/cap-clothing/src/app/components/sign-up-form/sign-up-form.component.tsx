@@ -1,11 +1,13 @@
 import { capitalize } from 'apps/cap-clothing/src/utils/string.utils';
 import { createNewUserWithEmailAndPassword, createUserDocumentFromAuth } from 'apps/cap-clothing/src/utils/firebase/firebase.utils';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useContext, useState } from 'react';
 
-import './sign-up-form.styles.scss';
 import { FirebaseError } from 'firebase/app';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
+import { UserContext } from '../../context/user.context';
+
+import './sign-up-form.styles.scss';
 
 interface formValues {
   displayName: string;
@@ -24,6 +26,7 @@ const SignUpForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [formValues, setFormValues] = useState<formValues>(defaultForm);
   const { displayName, email, password, confirmPassword } = formValues;
+  const { setCurrentUser } = useContext(UserContext);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -41,6 +44,7 @@ const SignUpForm = () => {
       try {
         const response = await createNewUserWithEmailAndPassword(email, password);
         if (response) {
+          setCurrentUser(response.user);
           await createUserDocumentFromAuth(response.user, displayName);
           setFormValues(defaultForm);
         }

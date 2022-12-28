@@ -4,13 +4,17 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './app/app';
 
+import { UserProvider } from './app/context/user.context';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </BrowserRouter>
   </StrictMode>
 );
