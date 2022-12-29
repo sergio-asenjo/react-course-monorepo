@@ -83,5 +83,5 @@ export async function signOutAuthUser(): Promise<void> {
 export async function onAuthStateChangedListener(
   callback: (user: User | null) => void
 ) {
-  onAuthStateChanged(auth, callback);
+  return onAuthStateChanged(auth, callback);
 }

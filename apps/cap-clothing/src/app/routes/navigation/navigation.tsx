@@ -13,7 +13,7 @@ export interface NavigationProps {}
 const Navigation = (props: NavigationProps) => {
   const [active, setActive] = useState('/');
   const location = useLocation();
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const links = [
     { id: 1, to: '/', description: 'Home' },
     { id: 2, to: '/shop', description: 'Shop' },
@@ -23,11 +23,6 @@ const Navigation = (props: NavigationProps) => {
   useEffect(() => {
     setActive(location.pathname);
   },)
-
-  const handleSignOut = async () => {
-    await signOutAuthUser();
-    setCurrentUser(null);
-  }
 
   return (
     <>
@@ -43,7 +38,7 @@ const Navigation = (props: NavigationProps) => {
                   key={link.id}
                   to="/authentication"
                   description="Sign Out"
-                  onclick={handleSignOut}
+                  onclick={() => {}}
                   active={false}
                 />
               );

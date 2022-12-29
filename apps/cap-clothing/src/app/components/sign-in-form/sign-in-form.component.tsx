@@ -4,10 +4,9 @@ import {
   signInWithGoogleRedirect,
 } from 'apps/cap-clothing/src/utils/firebase/firebase.utils';
 import { FirebaseError } from 'firebase/app';
-import { ChangeEvent, FormEvent, useState, useContext } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import Button from '../button/button.component';
 import FormInput from '../form-input/form-input.component';
-import { UserContext } from '../../context/user.context';
 
 import './sign-in-form.styles.scss';
 
@@ -24,8 +23,6 @@ const SignInForm = () => {
   const [formValues, setFormValues] = useState<signInForm>(defaultForm);
   const { email, password } = formValues;
 
-  const { setCurrentUser } = useContext(UserContext);
-
   const resetForm = () => {
     setFormValues(defaultForm);
   };
@@ -36,8 +33,7 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGoogleRedirect();
-    await createUserDocumentFromAuth(user);
+    await signInWithGoogleRedirect();
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -48,7 +44,6 @@ const SignInForm = () => {
       if (response) {
         const { user } = response;
         console.debug(response);
-        setCurrentUser(user);
       }
       resetForm();
     } catch (error) {
