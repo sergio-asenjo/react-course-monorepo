@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { formatCurrency } from 'apps/cap-clothing/src/utils/number.utils';
 import { ProductsContext } from '../../context/products.context';
 import './shop.styles.scss';
+import ProductCard from '../../components/product-card/product-card.component';
 
 const Shop = () => {
   const { products } = useContext(ProductsContext);
@@ -10,9 +10,9 @@ const Shop = () => {
     <div className="shop-page">
       <h1>Shop Page</h1>
       <div className="items">
-        {products.map(({ id, name, price }) => (
-          <p key={id}>{name} {formatCurrency(price)}</p>
-        ))}                
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </div>
     </div>
   );

@@ -48,6 +48,17 @@
   }
 }
 
+.button--shop {
+  border: 1px solid #000;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+
+  &:hover {
+    background-color: #000;
+    color: #fff;
+  }
+}
+
 .spinner-container {
   display: flex;
   justify-content: center;

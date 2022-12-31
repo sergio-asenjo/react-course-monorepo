@@ -5,7 +5,7 @@ import './button.styles.scss';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   isLoading?: boolean;
-  buttonType: 'normal' | 'inverted' | 'google';
+  buttonType: 'normal' | 'inverted' | 'google' | 'shop';
   children?: ReactNode;
 }
 
