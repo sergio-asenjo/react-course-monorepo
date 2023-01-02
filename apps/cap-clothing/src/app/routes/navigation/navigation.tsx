@@ -1,12 +1,16 @@
 import { useEffect, useState, useContext } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
+import './navigation.styles.scss';
+
 import Crown from '../../../assets/crown.svg';
 import NavLink from '../../components/nav-link/nav-link.component';
-import { UserContext } from '../../context/user.context';
-import { signOutAuthUser } from '../../../utils/firebase/firebase.utils';
+import CartIcon from '../../components/cart-icon/cart-icon.component';
+import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 
-import './navigation.styles.scss';
+import { UserContext } from '../../context/user.context';
+import { CartContext } from '../../context/cart.context';
+import { signOutAuthUser } from '../../../utils/firebase/firebase.utils';
 
 export interface NavigationProps {}
 
@@ -14,6 +18,7 @@ const Navigation = (props: NavigationProps) => {
   const [active, setActive] = useState('/');
   const location = useLocation();
   const { currentUser } = useContext(UserContext);
+  const { isCartOpen } = useContext(CartContext);
   const links = [
     { id: 1, to: '/', description: 'Home' },
     { id: 2, to: '/shop', description: 'Shop' },
@@ -38,7 +43,7 @@ const Navigation = (props: NavigationProps) => {
                   key={link.id}
                   to="/authentication"
                   description="Sign Out"
-                  onclick={() => {}}
+                  onclick={signOutAuthUser}
                   active={false}
                 />
               );
@@ -54,7 +59,9 @@ const Navigation = (props: NavigationProps) => {
               );
             }}
           )}
+          <CartIcon></CartIcon>
         </section>
+        { isCartOpen && <CartDropdown /> }
       </nav>
       <Outlet />
     </>
