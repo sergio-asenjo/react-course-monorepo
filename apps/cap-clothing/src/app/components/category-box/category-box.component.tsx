@@ -5,7 +5,7 @@ interface CategoryBoxProps {
   imageUrl: string;
 }
 
-const CategoryBox = ({ title, imageUrl }: CategoryBoxProps) => {
+export const CategoryBox = ({ title, imageUrl }: CategoryBoxProps) => {
   return (
     <div className="category flex-col">
       <div
