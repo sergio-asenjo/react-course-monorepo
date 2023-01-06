@@ -6,6 +6,7 @@ interface ICartContext {
   setIsCartOpen: (value: boolean) => void;
   cartItems: ICartItem[];
   addItemToCart: (item: ICartItem) => void;
+  reduceItemFromCart: (item: ICartItem) => void;
   cartCount: number;
 }
 
@@ -14,6 +15,7 @@ export const CartContext = createContext({
   setIsCartOpen: () => {},
   cartItems: [],
   addItemToCart: () => {},
+  reduceItemFromCart: () => {},
   cartCount: 0,
 } as ICartContext);
 
@@ -31,7 +33,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     setCartItems(addCartItem(cartItems, item));
   };
 
-  const value = { isCartOpen, setIsCartOpen, cartItems, addItemToCart, cartCount };
+  const reduceItemFromCart = (item: ICartItem) => {
+    setCartItems(reduceCartItem(cartItems, item));
+  };
+
+  const value = { isCartOpen, setIsCartOpen, cartItems, addItemToCart, cartCount, reduceItemFromCart };
 
   return (
     <CartContext.Provider value={value}>
@@ -50,4 +56,16 @@ function addCartItem(cartItems: ICartItem[], cartItemToAdd: ICartItem): ICartIte
   }
 
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+}
+
+function reduceCartItem(cartItems: ICartItem[], cartItemToReduce: ICartItem): ICartItem[] {
+  const existingCartItem = cartItems.find((cartItem) => cartItem.id === cartItemToReduce.id);
+
+  if (existingCartItem && existingCartItem.quantity === 1) {
+    return cartItems.filter((cartItem) => cartItem.id !== cartItemToReduce.id);
+  }
+
+  return cartItems.map((cartItem) =>
+    cartItem.id === cartItemToReduce.id ? { ...cartItem, quantity: cartItem.quantity! - 1 } : cartItem
+  );
 }
