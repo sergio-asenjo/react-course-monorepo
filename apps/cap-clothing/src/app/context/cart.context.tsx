@@ -8,6 +8,7 @@ interface ICartContext {
   addItemToCart: (item: ICartItem) => void;
   reduceItemFromCart: (item: ICartItem) => void;
   cartCount: number;
+  removeItemFromCart: (item: ICartItem) => void;
 }
 
 export const CartContext = createContext({
@@ -17,6 +18,7 @@ export const CartContext = createContext({
   addItemToCart: () => {},
   reduceItemFromCart: () => {},
   cartCount: 0,
+  removeItemFromCart: () => {},
 } as ICartContext);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
@@ -37,7 +39,19 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     setCartItems(reduceCartItem(cartItems, item));
   };
 
-  const value = { isCartOpen, setIsCartOpen, cartItems, addItemToCart, cartCount, reduceItemFromCart };
+  const removeItemFromCart = (item: ICartItem) => {
+    setCartItems(removeCartItem(cartItems, item));
+  };
+
+  const value = {
+    isCartOpen,
+    setIsCartOpen,
+    cartItems,
+    addItemToCart,
+    cartCount,
+    reduceItemFromCart,
+    removeItemFromCart
+  };
 
   return (
     <CartContext.Provider value={value}>
@@ -68,4 +82,8 @@ function reduceCartItem(cartItems: ICartItem[], cartItemToReduce: ICartItem): IC
   return cartItems.map((cartItem) =>
     cartItem.id === cartItemToReduce.id ? { ...cartItem, quantity: cartItem.quantity! - 1 } : cartItem
   );
+}
+
+function removeCartItem(cartItems: ICartItem[], cartItemToRemove: ICartItem): ICartItem[] {
+  return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
 }

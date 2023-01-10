@@ -1,27 +1,45 @@
 import { useContext } from 'react';
+import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
 import { CartContext } from '../../context/cart.context';
 
 import './checkout.styles.scss';
 
 export const Checkout = () => {
-  const { cartItems, addItemToCart, reduceItemFromCart } = useContext(CartContext);
+  const { cartItems, addItemToCart, reduceItemFromCart, removeItemFromCart } = useContext(CartContext);
 
   return (
-    <div className="checkout-page" >
-      I am the checkout page
+    <div className="checkout-page">
+      <div className="checkout-header flex-row">
+        <div className="header-block">
+          Product
+        </div>
+        <div className="header-block">
+          Description
+        </div>
+        <div className="header-block">
+          Quantity
+        </div>
+        <div className="header-block">
+          Price
+        </div>
+        <div className="header-block">
+          Remove
+        </div>
+      </div>
       <div className="flex-col">
-        {cartItems.map(cartItem =>
-          <div key={cartItem.id}>
-            <h2>{cartItem.name}</h2>
-            <h3>{cartItem.quantity}</h3>
-            <span onClick={() => reduceItemFromCart(cartItem)}>Decrement</span>
-            <span onClick={() => addItemToCart(cartItem)}>Increment</span>
-          </div>
-        )}
+        {cartItems.map((cartItem) => (
+          <CheckoutItem 
+            key={cartItem.id}
+            cartItem={cartItem}
+            removeItem={removeItemFromCart}
+            increaseQuantity={addItemToCart}
+            decreaseQuantity={reduceItemFromCart}
+          />
+        ))}
       </div>
     </div>
-  )
+  );
 };
 
 export default Checkout;
