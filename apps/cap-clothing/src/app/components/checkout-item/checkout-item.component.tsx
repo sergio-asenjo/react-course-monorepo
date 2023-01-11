@@ -1,3 +1,4 @@
+import { formatCurrency } from 'apps/cap-clothing/src/utils/number.utils';
 import { ICartItem } from '../../interfaces/ICartItem';
 
 import './checkout-item.styles.scss';
@@ -18,8 +19,8 @@ export const CheckoutItem = ({
   const { name, imageUrl, price, quantity } = cartItem;
 
   return (
-    <div className="co-item flex-row">
-      <img src={imageUrl} alt="item" />
+    <div className="co-item">
+      <img src={imageUrl} alt="item" className="co-item__img" />
       <div className="co-item__name">{name}</div>
       <div className="co-item__quantity">
         <span className="symbol" onClick={() => decreaseQuantity(cartItem)}>
@@ -30,7 +31,7 @@ export const CheckoutItem = ({
           &gt;
         </span>
       </div>
-      <div className="co-item__price">{price}</div>
+      <div className="co-item__price">{formatCurrency(price*quantity!)}</div>
       <div className="co-item__remove" onClick={() => removeItem(cartItem)}>
         &#10005;
       </div>

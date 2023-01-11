@@ -1,24 +1,25 @@
 
 .co-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   padding: 1rem 3rem;
-  border: 1px solid black;
-  margin-bottom: 1rem;
   align-items: center;
-  justify-content: space-between;
   
   &__name {
     font-size: 2rem;
   }
 
-  &__image {
-    width: 20%;
+  &__img {
+    width: 80%;
   }
 
   &__price {
+    justify-self: center;
     font-size: 2rem;
   }
 
   &__quantity {
+    justify-self: center;
     font-size: 2rem;
 
     .symbol {
@@ -30,5 +31,6 @@
   &__remove {
     font-size: 2rem;
     cursor: pointer;
+    justify-self: center;
   }
 }
