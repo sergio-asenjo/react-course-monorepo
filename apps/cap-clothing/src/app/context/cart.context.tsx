@@ -9,6 +9,7 @@ interface ICartContext {
   reduceItemFromCart: (item: ICartItem) => void;
   cartCount: number;
   removeItemFromCart: (item: ICartItem) => void;
+  cartTotal: number;
 }
 
 export const CartContext = createContext({
@@ -19,16 +20,23 @@ export const CartContext = createContext({
   reduceItemFromCart: () => {},
   cartCount: 0,
   removeItemFromCart: () => {},
+  cartTotal: 0,
 } as ICartContext);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
   const [cartCount, setCartCount] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
     const cartCount = cartItems.reduce((total, cartItem) => total + cartItem.quantity!, 0);
     setCartCount(cartCount);
+  }, [cartItems]);
+
+  useEffect(() => {
+    const cartTotal = cartItems.reduce((total, cartItem) => total + cartItem.quantity! * cartItem.price, 0);
+    setCartTotal(cartTotal);
   }, [cartItems]);
 
   const addItemToCart = (item: ICartItem) => {
@@ -50,7 +58,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     addItemToCart,
     cartCount,
     reduceItemFromCart,
-    removeItemFromCart
+    removeItemFromCart,
+    cartTotal,
   };
 
   return (

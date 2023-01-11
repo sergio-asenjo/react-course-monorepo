@@ -31,7 +31,7 @@ export const CheckoutItem = ({
           &gt;
         </span>
       </div>
-      <div className="co-item__price">{formatCurrency(price*quantity!)}</div>
+      <div className="co-item__price">{formatCurrency(price)}</div>
       <div className="co-item__remove" onClick={() => removeItem(cartItem)}>
         &#10005;
       </div>
