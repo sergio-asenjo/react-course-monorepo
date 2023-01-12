@@ -11,10 +11,10 @@ export const CategoriesProvider = ({ children }: { children: ReactNode }) => {
   const [categoriesMap, setCategoriesMap] = useState({});
 
   useEffect(() => {
-    console.info("ProductProvider useEffect");
     const getProducts = async () => {
       const categoryMap = await getCategoriesAndDocuments();
       setCategoriesMap(categoryMap);
+      console.debug("CategoriesProvider: getProducts: categoryMap", categoryMap)
     }
 
     getProducts();

@@ -1,0 +1,21 @@
+.category-preview {
+  padding: 2rem 0;
+
+  h2 {
+    text-align: center;
+    span {
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        color: hsl(0deg, 0%, 40%);;
+      }
+    }
+  }
+
+  .preview {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+  }
+}
