@@ -11,7 +11,16 @@ import {
   UserCredential,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from 'firebase/firestore';
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: 'AIzaSyD1wmDRmREONG-n_0zZcFK7jMYcQHF0Mz0',
@@ -84,4 +93,37 @@ export async function onAuthStateChangedListener(
   callback: (user: User | null) => void
 ) {
   return onAuthStateChanged(auth, callback);
+}
+
+export async function addCollectionAndDocuments(
+  collectionKey: string,
+  objectsToAdd: any[]): Promise<void>
+{
+  const collectionReference = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((obj) => {
+    const newDocRef = doc(collectionReference, obj.title.toLowerCase());
+    batch.set(newDocRef, obj);
+  });
+
+  await batch.commit();
+
+  console.info('Batch commit successful.');
+}
+
+export async function getCategoriesAndDocuments() {
+  const collectionRef = collection(db, 'categories');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const categoyMap = querySnapshot.docs.reduce(
+    (accumulator, doc) => {
+      const { title, items } = doc.data();
+      accumulator[title.toLowerCase()] = items;
+      return accumulator;
+    }, {} as { [key: string]: any[] }
+  );
+
+  return categoyMap;
 }
