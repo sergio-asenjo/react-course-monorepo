@@ -1,13 +1,22 @@
+import { useNavigate } from 'react-router-dom';
+
 import './category-box.styles.scss';
 
 interface CategoryBoxProps {
   title: string;
   imageUrl: string;
+  route: string;
 }
 
-export const CategoryBox = ({ title, imageUrl }: CategoryBoxProps) => {
+export const CategoryBox = ({ title, imageUrl, route }: CategoryBoxProps) => {
+  const navigate = useNavigate();
+
+  const onNavitageHandler = () => {
+    navigate(route);
+  };
+
   return (
-    <div className="category flex-col">
+    <div className="category flex-col" onClick={onNavitageHandler}>
       <div
         className="category__image"
         style={{

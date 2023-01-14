@@ -3,10 +3,13 @@
 
   h2 {
     text-align: center;
-    span {
+    .category-link {
       font-size: 2.5rem;
       cursor: pointer;
       transition: all 0.3s ease-in-out;
+      color: #202020;
+      text-decoration: none;
+
       &:hover {
         color: hsl(0deg, 0%, 40%);;
       }
