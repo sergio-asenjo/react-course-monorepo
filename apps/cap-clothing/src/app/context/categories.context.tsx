@@ -14,7 +14,6 @@ export const CategoriesProvider = ({ children }: { children: ReactNode }) => {
     const getProducts = async () => {
       const categoryMap = await getCategoriesAndDocuments();
       setCategoriesMap(categoryMap);
-      console.debug("CategoriesProvider: getProducts: categoryMap", categoryMap)
     }
 
     getProducts();
