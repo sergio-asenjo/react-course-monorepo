@@ -6,7 +6,6 @@ import { store } from './app/store/store';
 
 import App from './app/app';
 
-import { UserProvider } from './app/context/user.context';
 import { CategoriesProvider } from './app/context/categories.context';
 import { CartProvider } from './app/context/cart.context';
 
@@ -17,13 +16,11 @@ root.render(
   <StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <UserProvider>
-          <CategoriesProvider>
-            <CartProvider>
-              <App />
-            </CartProvider>
-          </CategoriesProvider>
-        </UserProvider>
+        <CategoriesProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </CategoriesProvider>
       </BrowserRouter>
     </Provider>
   </StrictMode>
