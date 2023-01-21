@@ -8,7 +8,7 @@ import Home from './routes/home/home.component';
 import Shop from './routes/shop/shop.component';
 import Authentication from './routes/authentication/authentication.component';
 import Checkout from './routes/checkout/checkout.component';
-import { setCurrentUser } from './store/reducers/user.action';
+import { setCurrentUser } from './store/reducers/user/user.action';
 
 import './app.styles.scss';
 

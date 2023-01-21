@@ -1,5 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 import './navigation.styles.scss';
 
@@ -8,16 +10,17 @@ import NavLink from '../../components/nav-link/nav-link.component';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 
-import { UserContext } from '../../context/user.context';
 import { CartContext } from '../../context/cart.context';
+import { selectCurrentUser } from '../../store/reducers/user/user.selector';
 import { signOutAuthUser } from '../../../utils/firebase/firebase.utils';
+import { AppState } from '../../store/app-state.interface';
 
-export interface NavigationProps {}
+interface NavigationProps {}
 
 const Navigation = (props: NavigationProps) => {
+  const currentUser = useSelector<AppState>(selectCurrentUser);
   const [active, setActive] = useState('/');
   const location = useLocation();
-  const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
   const links = [
     { id: 1, to: '/', description: 'Home' },
