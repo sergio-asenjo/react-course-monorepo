@@ -6,6 +6,6 @@ export interface AppState {
     currentUser: User | null;
   },
   categories: {
-    categoriesMap: ICategory;
+    categoriesMap: ICategory[];
   },
 }

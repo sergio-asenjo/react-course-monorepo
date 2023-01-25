@@ -1,12 +1,12 @@
 import { ICategory } from '../../../interfaces/ICategory';
 
 const CATEGORIES_INITIAL_STATE = {
-  categoriesMap: {},
+  categoriesMap: [] as ICategory[],
 };
 
 interface CategoryActions {
-  type: 'SET_CATEGORIES_MAP';
-  payload: ICategory;
+  type: 'SET_CATEGORIES';
+  payload: ICategory[];
 }
 
 export const categoriesReducer = (
@@ -16,7 +16,7 @@ export const categoriesReducer = (
   const { type, payload } = action;
 
   switch (type) {
-    case 'SET_CATEGORIES_MAP':
+    case 'SET_CATEGORIES':
       return {
         ...state,
         categoriesMap: payload,

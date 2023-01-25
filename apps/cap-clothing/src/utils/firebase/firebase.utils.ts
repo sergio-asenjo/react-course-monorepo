@@ -1,3 +1,4 @@
+import { ICategory } from './../../app/interfaces/ICategory';
 import { FirebaseOptions, initializeApp } from 'firebase/app';
 import {
   getAuth,
@@ -112,18 +113,10 @@ export async function addCollectionAndDocuments(
   console.info('Batch commit successful.');
 }
 
-export async function getCategoriesAndDocuments() {
+export async function getCategoriesAndDocuments(): Promise<ICategory[]> {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
-  const categoyMap = querySnapshot.docs.reduce(
-    (accumulator, doc) => {
-      const { title, items } = doc.data();
-      accumulator[title.toLowerCase()] = items;
-      return accumulator;
-    }, {} as { [key: string]: any[] }
-  );
-
-  return categoyMap;
+  return querySnapshot.docs.map((doc) => doc.data()) as ICategory[];
 }
