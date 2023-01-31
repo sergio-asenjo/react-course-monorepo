@@ -14,7 +14,6 @@ const INITIAL_STATE: UserState = {
 };
 
 export const userReducer = (state: UserState = INITIAL_STATE, action: UserAction) => {
-  console.debug('userReducer: action', action);
   switch (action.type) {
     case 'SET_CURRENT_USER':
       return {

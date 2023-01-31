@@ -8,4 +8,5 @@ export interface AppState {
   categories: {
     categoriesMap: ICategory[];
   },
+  
 }
