@@ -1,7 +1,6 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
 
 import './navigation.styles.scss';
 
@@ -10,7 +9,7 @@ import NavLink from '../../components/nav-link/nav-link.component';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 
-import { CartContext } from '../../context/cart.context';
+import { selectIsCartOpen } from '../../store/reducers/cart/cart.selector';
 import { selectCurrentUser } from '../../store/reducers/user/user.selector';
 import { signOutAuthUser } from '../../../utils/firebase/firebase.utils';
 import { AppState } from '../../store/app-state.interface';
@@ -21,7 +20,7 @@ const Navigation = (props: NavigationProps) => {
   const currentUser = useSelector<AppState>(selectCurrentUser);
   const [active, setActive] = useState('/');
   const location = useLocation();
-  const { isCartOpen } = useContext(CartContext);
+  const isCartOpen = useSelector<AppState>(selectIsCartOpen);
   const links = [
     { id: 1, to: '/', description: 'Home' },
     { id: 2, to: '/shop', description: 'Shop' },
@@ -64,7 +63,7 @@ const Navigation = (props: NavigationProps) => {
           )}
           <CartIcon></CartIcon>
         </section>
-        { isCartOpen && <CartDropdown /> }
+        { (isCartOpen as boolean) && <CartDropdown /> }
       </nav>
       <Outlet />
     </>
