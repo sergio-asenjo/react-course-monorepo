@@ -13,12 +13,12 @@ export const cartReducer = (state: CartState = CART_INITIAL_STATE, action: CartA
     case 'SET_CART_ITEMS':
       return {
         ...state,
-        cartItems: payload.cartItems!,
+        cartItems: payload,
       };
     case 'SET_IS_CART_OPEN':
       return {
         ...state,
-        isCartOpen: payload.isCartOpen!,
+        isCartOpen: payload,
       };
     default:
       return state;
