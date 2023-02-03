@@ -1,19 +1,23 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { formatCurrency } from 'apps/cap-clothing/src/utils/number.utils';
-import { useContext } from 'react';
-import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
-import { CartContext } from '../../context/cart.context';
+import CheckoutItem from '../../components/checkout-item/checkout-item.component';
+import {
+  selectCartItems,
+  selectCartTotal,
+} from '../../store/reducers/cart/cart.selector';
+import {
+  removeItemFromCart,
+  reduceItemFromCart,
+  addItemToCart,
+} from '../../store/reducers/cart/cart.action';
 
 import './checkout.styles.scss';
 
 export const Checkout = () => {
-  const {
-    cartItems,
-    addItemToCart,
-    reduceItemFromCart,
-    removeItemFromCart,
-    cartTotal,
-  } = useContext(CartContext);
+  const cartItems = useSelector(selectCartItems);
+  const cartTotal = useSelector(selectCartTotal);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -33,9 +37,9 @@ export const Checkout = () => {
               <CheckoutItem
                 key={cartItem.id}
                 cartItem={cartItem}
-                removeItem={removeItemFromCart}
-                increaseQuantity={addItemToCart}
-                decreaseQuantity={reduceItemFromCart}
+                removeItem={() => dispatch(removeItemFromCart(cartItems, cartItem))}
+                increaseQuantity={() => dispatch(addItemToCart(cartItems, cartItem))}
+                decreaseQuantity={() => dispatch(reduceItemFromCart(cartItems, cartItem))}
               />
             ))
           )}

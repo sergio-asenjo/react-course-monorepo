@@ -1,9 +1,10 @@
-import { formatCurrency } from 'apps/cap-clothing/src/utils/number.utils';
-import { IProduct } from '../../interfaces/IProduct';
-import { CartContext } from '../../context/cart.context';
-import { useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '../button/button.component';
+import { addItemToCart } from '../../store/reducers/cart/cart.action';
+import { selectCartItems } from '../../store/reducers/cart/cart.selector';
+import { formatCurrency } from 'apps/cap-clothing/src/utils/number.utils';
+import { IProduct } from '../../interfaces/IProduct';
 
 import './product-card.styles.scss';
 
@@ -12,11 +13,12 @@ export interface ProductCardProps {
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  const dispatch = useDispatch();
   const { name, price, imageUrl } = product;
-  const { addItemToCart } = useContext(CartContext);
+  const cartItems = useSelector(selectCartItems);
 
   const addProductToCart = () => {
-    addItemToCart(product);
+    dispatch(addItemToCart(cartItems, product));
   };
 
   return (
