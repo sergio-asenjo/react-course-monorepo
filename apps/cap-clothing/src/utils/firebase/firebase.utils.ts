@@ -109,8 +109,6 @@ export async function addCollectionAndDocuments(
   });
 
   await batch.commit();
-
-  console.info('Batch commit successful.');
 }
 
 export async function getCategoriesAndDocuments(): Promise<ICategory[]> {
