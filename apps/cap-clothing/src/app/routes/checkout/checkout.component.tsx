@@ -13,6 +13,7 @@ import {
 } from '../../store/reducers/cart/cart.action';
 
 import './checkout.styles.scss';
+import PaymentForm from '../../components/payment-form/payment-form.component';
 
 export const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
@@ -48,6 +49,7 @@ export const Checkout = () => {
       <div className="flex-col">
         <span className="total">TOTAL: {formatCurrency(cartTotal)}</span>
       </div>
+      <PaymentForm />
     </>
   );
 };
