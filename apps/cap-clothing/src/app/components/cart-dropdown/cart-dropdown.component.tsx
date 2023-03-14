@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,9 +13,9 @@ export const CartDropdown = () => {
   const cartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
 
-  const goToCheckout = () => {
+  const goToCheckout = useCallback(() => {
     navigate('/checkout');
-  };
+  }, [])
 
   return (
     <div className="cart-dropdown flex-col">
