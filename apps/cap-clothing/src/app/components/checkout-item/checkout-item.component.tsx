@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { formatCurrency } from 'apps/cap-clothing/src/utils/number.utils';
 import { ICartItem } from '../../interfaces/ICartItem';
 
@@ -10,7 +12,7 @@ interface CheckoutItemProps {
   decreaseQuantity: (item: ICartItem) => void;
 }
 
-export const CheckoutItem = ({
+export const CheckoutItem = memo(({
   cartItem,
   removeItem,
   increaseQuantity,
@@ -37,6 +39,6 @@ export const CheckoutItem = ({
       </div>
     </div>
   );
-};
+});
 
 export default CheckoutItem;

@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import './cart-item.styles.scss';
 
 interface CartItemProps {
@@ -9,7 +11,7 @@ interface CartItemProps {
   };
 }
 
-export const CartItem = ({ cartItem }: CartItemProps) => {
+export const CartItem = memo(({ cartItem }: CartItemProps) => {
   const { imageUrl, price, name, quantity } = cartItem;
 
   return (
@@ -26,6 +28,6 @@ export const CartItem = ({ cartItem }: CartItemProps) => {
       </div>
     </div>
   );
-};
+});
 
 export default CartItem;
