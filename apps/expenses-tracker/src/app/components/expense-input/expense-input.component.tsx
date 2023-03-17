@@ -1,36 +1,41 @@
-import { FC } from "react";
+import { FC, FormEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addExpense } from "../../store/expense/expense-slice";
 
 import "./expense-input.styles.scss";
 
-export interface ExpenseInputProps {
-  name: string;
-  price: number;
-};
+export const ExpenseInput: FC<{}> = () => {
+  const dispatch = useDispatch();
+  const [ price, setPrice ] = useState(0);
+  const [ name, setName ] = useState('');
 
-export const ExpenseInput: FC<ExpenseInputProps> = ({ name, price }) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(addExpense({ name, price }));
+  }
+
   return (
-    <form>
-      <div className="row justify-content-center">
-        <div className="col-12 col-sm-5 col-md-4 col-lg-4 mb-2">
+    <form onSubmit={handleSubmit}>
+      <div className="expense-container flex col">
+        <div className="flex col">
           <input
             type="text"
             className="form-control"
             placeholder='Ex : "Apple"'
             name="name"
+            onChange={(e) => setName(e.target.value)}
           />
-        </div>
-        <div className="col-12 col-sm-2 col-md-4 col-lg-4 mb-2">
           <input
             type="number"
             step="0.01"
             className="form-control"
             placeholder="Ex: 3.99"
             name="price"
+            onChange={(e) => setPrice(+e.target.value)}
           />
         </div>
-
-        <div className="col-12 col-sm-2 col-md-4 col-lg-4 mb-2">
-          <button type="submit" className="btn btn-primary">
+        <div>
+          <button type="submit" className="btn">
             Add
           </button>
         </div>

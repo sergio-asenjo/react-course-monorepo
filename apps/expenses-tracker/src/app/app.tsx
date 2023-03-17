@@ -1,8 +1,14 @@
 import bg from '../assets/background.png';
+import ExpenseInput from './components/expense-input/expense-input.component';
+import List from './components/list/list.component';
 
 import './app.styles.scss';
+import { useSelector } from 'react-redux';
+import { selectExpenseList } from './store/expense/expense-slice';
 
 export function App() {
+  const expenseList = useSelector(selectExpenseList);
+
   return (
     <div 
       className={`main_container`}
@@ -18,10 +24,14 @@ export function App() {
       </div>
       <div className={`row workspace`}>
         <div className={`col-12  expense_input`}>
-          Expense Input
+          <ExpenseInput />
         </div>
         <div className={`col-11 col-md-6 col-lg-4 expense_list`}>
-          Expense History
+          <List items={
+            expenseList.map((item) => {
+              return item;
+            })
+          } />
           <div className={`col-12 expense_total`}>
             ExpenseTotal
           </div>

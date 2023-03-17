@@ -10,11 +10,13 @@ export interface ListItemProps {
 };
 
 export const ListItem: FC<ListItemProps> = ({ item }) => {
+  const { name, price } = item;
+
   return (
-    <tr>
-      <th>Fake name</th>
-      <td className="price">Fake price $</td>
-    </tr>
+    <div className="item flex row">
+      <p className="name">{name}</p>
+      <p className="price">${price}</p>
+    </div>
   )
 }
 

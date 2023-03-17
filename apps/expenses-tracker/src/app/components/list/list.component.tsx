@@ -13,14 +13,10 @@ export interface ListProps {
 
 export const List: FC<ListProps> = ({ items }) => {
   return (
-    <div style={{ overflowY: "scroll", height: "40%" }}>
-      <table className="table table-hover table-borderless">
-        <tbody>
-          {items.map((item) => (
-            <ListItem item={item} />
-          ))}
-        </tbody>
-      </table>
+    <div className="flex col">
+      {items.map((item, index) => (
+        <ListItem key={index} item={item} />
+      ))}
     </div>
   );
 };
