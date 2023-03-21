@@ -1,13 +1,16 @@
+import { useSelector } from 'react-redux';
+import { selectExpensesList } from './store/expense/expense-slice';
+
 import bg from '../assets/background.png';
-import ExpenseInput from './components/expense-input/expense-input.component';
 import List from './components/list/list.component';
+import IncomeInput from './components/income-input/income-input.component';
+import ExpenseInput from './components/expense-input/expense-input.component';
+import ExpenseTotal from './components/expense-total/expense-total.component';
 
 import './app.styles.scss';
-import { useSelector } from 'react-redux';
-import { selectExpenseList } from './store/expense/expense-slice';
 
 export function App() {
-  const expenseList = useSelector(selectExpenseList);
+  const expenseList = useSelector(selectExpensesList);
 
   return (
     <div 
@@ -19,7 +22,7 @@ export function App() {
           Logo
         </div>
         <div className={`col-9 income_input`}>
-          Income input
+          <IncomeInput />
         </div>
       </div>
       <div className={`row workspace`}>
@@ -33,7 +36,7 @@ export function App() {
             })
           } />
           <div className={`col-12 expense_total`}>
-            ExpenseTotal
+            <ExpenseTotal />
           </div>
         </div>
       </div>

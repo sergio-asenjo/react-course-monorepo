@@ -1,9 +1,14 @@
-.label {
-  font-weight: bold;
-  font-size: 22px;
-}
+.total-container {
+  gap: 1rem;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
 
-.amount {
-  text-align: right;
-  font-size: 22px;
+  .expenses {
+    justify-content: space-between;
+  }
+
+  .remaining {
+    justify-content: space-between;
+  }
 }

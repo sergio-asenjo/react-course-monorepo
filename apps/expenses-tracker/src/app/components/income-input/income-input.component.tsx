@@ -1,18 +1,29 @@
-import { FC } from "react";
+import { ChangeEvent, FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIncome, setIncome } from "../../store/expense/expense-slice";
 
 import "./income-input.styles.scss";
 
-export interface IncomeInputProps {
-  income: number;
-};
+export const IncomeInput: FC<{}> = () => {
+  const dispatch = useDispatch();
+  const income = useSelector(selectIncome);
 
-export const IncomeInput: FC<IncomeInputProps> = ({ income }) => {
+  const updateIncome = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    dispatch(setIncome(parseInt(value || "0")));
+  }
+
   return (
-    <div className="row justify-content-center mb-2">
-      <div className="col-6 label">Income</div>
-      <div className="col-6">
-        <input type="number" className="form-control" placeholder="Ex: 3000" />
-      </div>
+    <div className="flex row income">
+      <label className="label">Income: </label>
+      <input
+        type="number"
+        defaultValue={income}
+        onChange={updateIncome}
+        className="input"
+        placeholder="Ex: 3000"
+        
+      />
     </div>
   );
 };

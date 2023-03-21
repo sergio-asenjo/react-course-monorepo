@@ -7,20 +7,13 @@ interface Expense {
 }
 
 interface ExpenseState {
+  income: number;
   expensesList: Expense[];
 }
 
 const initialState: ExpenseState = {
-  expensesList: [
-    {
-      name: 'Apple',
-      price: 1.5,
-    },
-    {
-      name: 'Orange',
-      price: 1.2,
-    },
-  ],
+  income: 0,
+  expensesList: [],
 };
 
 export const expenseSlice = createSlice({
@@ -30,9 +23,13 @@ export const expenseSlice = createSlice({
     addExpense: (state, action: PayloadAction<{ name: string; price: number }>) => {
       state.expensesList.push(action.payload);
     },
+    setIncome: (state, action: PayloadAction<number>) => {
+      state.income = action.payload;
+    },
   },
 });
 
-export const { addExpense } = expenseSlice.actions;
-export const selectExpenseList = (state: RootState) => state.expense.expensesList;
+export const { addExpense, setIncome } = expenseSlice.actions;
+export const selectExpensesList = (state: RootState) => state.expense.expensesList;
+export const selectIncome = (state: RootState) => state.expense.income;
 export default expenseSlice.reducer;
