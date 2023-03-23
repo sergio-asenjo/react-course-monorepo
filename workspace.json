@@ -5,6 +5,7 @@
     "cap-clothing": "apps/cap-clothing",
     "cap-clothing-e2e": "apps/cap-clothing-e2e",
     "expenses-tracker": "apps/expenses-tracker",
-    "monsters-rolodex": "apps/monsters-rolodex"
+    "monsters-rolodex": "apps/monsters-rolodex",
+    "notes-manager": "apps/notes-manager"
   }
 }
