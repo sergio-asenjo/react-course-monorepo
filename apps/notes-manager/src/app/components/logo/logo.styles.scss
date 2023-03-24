@@ -1,0 +1,22 @@
+.logo {
+  cursor: pointer;
+
+  &__information {
+    align-items: center;
+
+    .icon {
+      height: 50px;
+    }
+
+    .name {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #007bff;
+    }
+  }
+  
+  &__description {
+    font-size: 1.2rem;
+    color: #6c757d;
+  }
+}
