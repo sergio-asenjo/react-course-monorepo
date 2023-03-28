@@ -11,9 +11,12 @@ export const notesSlice = createSlice({
     setNotesList: (state, action: PayloadAction<Note[]>) => {
       state.notesList = action.payload;
     },
+    addNote: (state, action: PayloadAction<Note>) => {
+      state.notesList.push(action.payload);
+    }
   }
 });
 
-export const { setNotesList } = notesSlice.actions;
+export const { setNotesList, addNote } = notesSlice.actions;
 export const selectNotesList = (state: RootState) => state.notes.notesList;
 export const noteReducer = notesSlice.reducer;

@@ -1,7 +1,7 @@
 const BASE_API = 'http://localhost:3000/notes';
 
 export interface Note {
-  id: number;
+  id?: number;
   title: string;
   content: string;
   created_at: string;
@@ -31,19 +31,20 @@ export class NotesService {
     }
   }
 
-  public static async create(note: Note): Promise<boolean> {
+  public static async create(note: Note): Promise<Note> {
     try {
-      await fetch(`${BASE_API}`, {
+      const response = await fetch(`${BASE_API}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(note)
       });
-      return true;
+      const newNote = await response.json();
+      return newNote as Note;
     } catch (error) {
       console.error(error);
-      return false;
+      return {} as Note;
     }
   }
 

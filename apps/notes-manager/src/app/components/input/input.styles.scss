@@ -1,0 +1,41 @@
+
+.input-container {
+  gap: 5px;
+
+  .label {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .input {
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 400;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+
+    &:focus {
+      border: 1px solid #000;
+    }
+  }
+
+  .textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 400;
+    outline: none;
+    resize: vertical;
+
+    &:focus {
+      border: 1px solid #000;
+    }
+  }
+}
