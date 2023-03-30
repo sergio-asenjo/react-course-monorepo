@@ -6,6 +6,7 @@ import { ReactComponent as EditIcon } from '../../../assets/create-outline.svg';
 import { ReactComponent as DeleteIcon } from '../../../assets/trash-outline.svg';
 
 import './note-form.styles.scss';
+import FieldError from '../field-error/field-error.component';
 
 interface NoteFormProps {
   type: 'new' | 'edit';
@@ -49,9 +50,17 @@ const NoteForm: FC<NoteFormProps> = ({
       <main className="form__main flex col">
         <section className="flex col">
           <Input label="Title" onChange={handleFormChange} type="text" name="title" />
+          {
+            formValues.title.length > 20 &&
+            <FieldError error={'Title must be less than 20 characters'} />
+          }
         </section>
         <section className="flex col">
           <Input label="Content" onChange={handleFormChange} type="textarea" name="content" />
+          {
+            formValues.content.length > 200 &&
+            <FieldError error={'Content must be less than 200 characters'} />
+          }
         </section>
         <div className="form-button">
           <Button type="button" color="primary" onClick={() => onSubmit(formValues)}>
