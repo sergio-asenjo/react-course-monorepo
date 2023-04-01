@@ -10,6 +10,13 @@
   transition: all 0.2s ease-in-out;
   aspect-ratio: 8 / 1;
 
+  &--disabled {
+    background-color: #e9ecef;
+    border-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+  }
+
   &:hover {
     background-color: #e6e6e6;
   }

@@ -12,7 +12,8 @@ interface NewNoteProps { }
 const NewNote: FC<NewNoteProps> = () => {
   const dispatch = useDispatch();
 
-  const handleFormSubmit = async (formValues: FormValues) => {
+  const handleFormSubmit = async (formValues: FormValues, isValid: boolean) => {
+    if (isValid) return;
     const newNote = await NotesService.create({
       created_at: new Date().toISOString(),
       ...formValues
@@ -29,7 +30,9 @@ const NewNote: FC<NewNoteProps> = () => {
         type="new"
         onClickEdit={() => console.log('edit')}
         onClickDelete={() => console.log('delete')}
-        onSubmit={handleFormSubmit}
+        onSubmit={
+          (formValues: FormValues, isValid: boolean) => handleFormSubmit(formValues, isValid)
+        }
       />
     </div>
   )

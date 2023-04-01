@@ -13,11 +13,14 @@ export const Button: FC<ButtonProps> = ({ children, ...props }: ButtonProps) => 
   const color = props.color;
   const type = props.type;
   const onClick = props.onClick;
+  const isDisabled = props.disabled;
 
   return (
     <button
       onClick={onClick}
-      className={`button ${color}`}
+      className={`
+        button ${isDisabled ? ' button--disabled' : color}`
+      }
       type={type}
     >
       {children}

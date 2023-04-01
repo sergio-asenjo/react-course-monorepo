@@ -12,12 +12,20 @@ interface NoteFormProps {
   type: 'new' | 'edit';
   onClickEdit: () => void;
   onClickDelete: () => void;
-  onSubmit: (formValues: FormValues) => void;
+  onSubmit: (formValues: FormValues, isValid: boolean) => void;
 };
 
 export interface FormValues {
   title: string;
   content: string;
+};
+
+function validateField(name: string, value: string, maxLength: number) {
+  if (value.length > maxLength) {
+    return `${name} must be less than ${maxLength} characters`;
+  } else {
+    return '';
+  }
 };
 
 const NoteForm: FC<NoteFormProps> = ({
@@ -27,9 +35,18 @@ const NoteForm: FC<NoteFormProps> = ({
     title: '',
     content: ''
   });
+  const [ formErrors, setFormErrors ] = useState<FormValues>({
+    title: '',
+    content: ''
+  });
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+
+    const error = validateField(name, value, name === 'title' ? 20 : 200);
+
+    setFormErrors({ ...formErrors, [name]: error });
+
     setFormValues({ ...formValues, [name]: value });
   };
 
@@ -51,19 +68,24 @@ const NoteForm: FC<NoteFormProps> = ({
         <section className="flex col">
           <Input label="Title" onChange={handleFormChange} type="text" name="title" />
           {
-            formValues.title.length > 20 &&
+            formErrors.title &&
             <FieldError error={'Title must be less than 20 characters'} />
           }
         </section>
         <section className="flex col">
           <Input label="Content" onChange={handleFormChange} type="textarea" name="content" />
           {
-            formValues.content.length > 200 &&
+            formErrors.content &&
             <FieldError error={'Content must be less than 200 characters'} />
           }
         </section>
         <div className="form-button">
-          <Button type="button" color="primary" onClick={() => onSubmit(formValues)}>
+          <Button 
+            type="button"
+            color="primary"
+            onClick={() => onSubmit(formValues, formErrors.title.length > 0 || formErrors.content.length > 0)}
+            disabled={ formErrors.title.length > 0 || formErrors.content.length > 0 }
+          >
             Save Note
           </Button>
         </div>
