@@ -15,11 +15,13 @@ const NewNote: FC<NewNoteProps> = () => {
   const handleFormSubmit = async (formValues: FormValues, isValid: boolean) => {
     if (isValid) return;
     const newNote = await NotesService.create({
+      id: 0,
       created_at: new Date().toISOString(),
       ...formValues
     });
     if (newNote) {
       dispatch(addNote(newNote));
+      alert('Note created successfully.');
     }
   }
 

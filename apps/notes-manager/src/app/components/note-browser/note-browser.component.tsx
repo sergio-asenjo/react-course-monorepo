@@ -1,15 +1,22 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import NoteCard from '../note-card/note-card.component';
-import { selectNotesList } from '../../store/notes/notes-slice';
+import { NotesService } from '../../api/notes';
+import { deleteNote, selectNotesList } from '../../store/notes/notes-slice';
 
 import './note-browser.styles.scss';
-import { useNavigate } from 'react-router-dom';
 
 export const NoteBrowser: FC<{}> = () => {
+  const dispatch = useDispatch();
   const notesSelect = useSelector(selectNotesList);
   const navigate = useNavigate();
+
+  const handleDelete = async (id: number) => {
+    const response = await NotesService.deleteById(id);
+    dispatch(deleteNote(id));
+  }
 
   return (
     <div className="browser flex col">
@@ -22,7 +29,7 @@ export const NoteBrowser: FC<{}> = () => {
             subtitle={new Date(note.created_at)}
             content={note.content}
             onClickCard={() => navigate(`/note/${note.id}`)}
-            onClickDelete={() => console.debug('delete')}
+            onClickDelete={() => handleDelete(note.id!)}
           />
         )
       }

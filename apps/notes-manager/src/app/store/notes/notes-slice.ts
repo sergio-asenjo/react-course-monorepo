@@ -13,10 +13,15 @@ export const notesSlice = createSlice({
     },
     addNote: (state, action: PayloadAction<Note>) => {
       state.notesList.push(action.payload);
-    }
+    },
+    deleteNote: (state, action: PayloadAction<number>) => {
+      state.notesList = state.notesList.filter(
+        (note) => note.id !== action.payload
+      );
+    },
   }
 });
 
-export const { setNotesList, addNote } = notesSlice.actions;
+export const { setNotesList, addNote, deleteNote } = notesSlice.actions;
 export const selectNotesList = (state: RootState) => state.notes.notesList;
 export const noteReducer = notesSlice.reducer;
